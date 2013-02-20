@@ -1,0 +1,60 @@
+dt {
+	margin-top: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 300;
+}
+
+body {
+	background-image: url('../img/background.png')
+}
+
+.gist-data {
+	background-color: white !important; 
+}
+
+.line-numbers {
+	background-color: #f9f9f9 !important;
+}
+
+.gist-meta {
+	background-color: #f9f9f9 !important;
+}
+
+.gist .gist-file .gist-data .line-pre {
+	font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace !important;
+}
+
+.container {
+	background-color: white;
+	padding: 0.5in 1in 0.5in 1in;
+	width: 8.5in;
+}
+
+.center-container {
+	margin:0px auto 0px auto;
+	width:8.5in;
+	padding: 0.5in 1in 0.5in 1in;
+	min-height:500px;
+	font-weight:300;
+	background:white;
+}
+
+.shadow {
+	box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.3);
+}
+
+.profile {
+	height: 85px;
+	width: 85px;
+}
+
+.article {
+	font-size:14pt;
+}
+
+.date {
+	font-size: 14pt;
+	font-weight: 100;
+}
