@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gregcurt.is - Android Dependency Injection</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="http://192.168.1.101:35729/livereload.js?snipver=1"></script>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,700' rel='stylesheet' type='text/css'>
+	<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="../css/main.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container shadow">
+		<h1 style="margin: 0 0 10px 0">Android Dependency Injection</h1>
+		<div class="muted date">February 25, 2013</div>
+		<hr>
+		<p>Dependency injection on Android is a notoriously difficult problem to tackle. The problem is, Android manages the creation and destruction of all activity instances, making it difficult for us to provide dependencies. The diagram below, taken from the Android developer docs, illustrates the activity lifecycle.</p>
+		<p style="text-align: center;">
+			<img src="http://developer.android.com/images/training/basics/basic-lifecycle.png" alt="Android activity lifecycle">
+		</p>
+		<p>So why is this an issue? When building testable apps, we want to be able to inject dependencies into our activities. This allows us to swap out our "real" objects with testable mocks. However, we can't do this since we don't have control over the creation of our activities. Unfortunately, this tends to promote a design involving heavy use of static singletons. Let's take a look at an example of a typical Android activity class.</p>
+
+		<p class="well"><span class="label label-info">Note</span> I'm not going to go into detail over what <a href="http://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a> and <a href="http://en.wikipedia.org/wiki/Inversion_of_control">inversion of control</a> (IoC) is. It has become a fairly common design pattern in the past few years, and there are plenty of other resources that can explain it far better than I can.</p>
+		
+		<h2>Basic Activity Example</h2>
+		<script src="https://gist.github.com/gcurtis/77cc8009009667b0ac7a.js"></script>
+		
+		<p>This makes sense at a first glance, but now say we want to test our activity. How do we do this without making real web service calls? We can create an integration test that makes calls to our server, but those are slow, less reliable, and require a separate testing environment.</p>
+		<p>Also notice that there is no straightforward way of providing objects to the <code>onCreate()</code> method. We cannot add any additional parameters because it is an overridden method defined by the base <code>Activity</code> class. We also cannot create a constructor because the Android OS only knows how to call the default empty constructor. So how do we fix this?</p>
+		
+		<h2>Using The Service Locator Pattern</h2>
+
+		<p>The first option is to use the service locator pattern. If you aren't familiar with this pattern, it's basically a way for our activity to grab the services (or dependencies) it needs.</p>
+
+		<blockquote>
+			<p>The basic idea behind a service locator is to have an object that knows how to get hold of all of the services that an application might need.</p>
+			<small><cite><a href="http://martinfowler.com/articles/injection.html">Inversion of Control Containers and the Dependency Injection pattern</a></cite> by Martin Fowler</small>
+		</blockquote>
+
+		<p>The following is an example of how this might work in the context of an Android app.</p>
+
+		<h3>Android Service Locator</h3>
+		<script src="https://gist.github.com/gcurtis/0eb21929f882ad36091b.js"></script>
+
+		<p>Now we can provide our <code>ServiceLocator</code> with a mock <code>WebServiceClient</code> when writing tests.</p>
+
+		<h3>Testing With Service Locator</h3>
+		<script src="https://gist.github.com/gcurtis/68b457ed8e74c362fa6d.js"></script>
+
+		<p>Our code is now much better. We can easily test logic that makes web service calls, our dependencies are clearly defined through <code>ServiceLocator</code>, and we've reduced the coupling between classes.</p>
+
+		<h2>Using Dagger</h2>
+
+		<p>The nice part about using the service locator pattern is that it can work nicely with regular dependency injection. <a href="http://square.github.com/dagger">Dagger</a> is a lightweight IoC framework that was designed with Android in mind. Dagger can automatically handle our dependencies, alleviating a lot of the effort.</p>
+
+		<p>The standard way of using an IoC framework, like Dagger, is to resolve all of your dependencies at startup. However, on Android this isn't possible because we cannot instantiate activities ourself. Instead, we can use Dagger's <code>ObjectGraph</code> as a type of service locator.</p>
+
+		<h3>Dagger Example</h3>
+
+		<script src="https://gist.github.com/gcurtis/3d90ceed779b09a3f10a.js"></script>
+
+		<p>So there we have it. I won't go into the details of how to use Dagger, but if you've used an IoC framework before, the syntax is fairly self-explanatory. Here, we get an instance of Dagger's object graph and use it to inject dependencies into our <code>MainActivity</code> object. Our Dagger <code>ObjectGraph</code> instance is essentially acting as a service locator.</p>
+
+		<h3>Advantages</h3>
+
+		<p>Using IoC provides a few advantages over our manual service locator:</p>
+
+		<ul>
+			<li><strong>All of our dependencies are grouped together.</strong> Instead of having calls to <code>ServiceLocator</code> sprinkled throughout our code, our injected field variables are conveniently listed in a single place.</li>
+			<li><strong>Reduced boiler plate.</strong> Manually injecting dependencies can become cumbersome as our app becomes more complex. This leads to the next point...</li>
+			<li><strong>Developers are more likely to use it.</strong> When your design is easier to implement, other team members are more likely to stick to it. It also means that less time is spent passing around dependencies and figuring out the order in which to instantiate them.</li>
+			<li><strong>Using Dagger also allows us to use regular dependency injection.</strong> Activities need to use a service locator because of their lifecycle, but other objects do not have this limitation. With Dagger we can satisfy as many dependencies as possible at the start of our app, but fall back to using a service locator pattern with our activities.</li>
+		</ul>
+
+		<h2>Summary</h2>
+
+		<p>As mobile devices become more powerful, the apps we create become more complex. It's important to take the time to ensure your Android apps are designed in a modular, testable way. It is generally agreed that a lack of automated testing is no longer acceptable for desktop and web apps, and mobile shouldn't be any exception.</p>
+
+		<hr>
+		<div class="text-center">
+			<small><a href="http://gregcurt.is">gregcurt.is</a></small>
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>
