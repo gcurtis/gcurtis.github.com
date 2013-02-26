@@ -26,14 +26,16 @@ body {
 	font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace !important;
 }
 
-.container {
+.comment-container {
 	background-color: white;
 	padding: 0.5in 1in 0.5in 1in;
 	width: 8.5in;
+	font-weight:300;
+	margin:0.5in auto 0.5in auto;
 }
 
 .center-container {
-	margin:0px auto 0px auto;
+	margin:0.5in auto 0px auto;
 	width:8.5in;
 	padding: 0.5in 1in 0.5in 1in;
 	min-height:500px;

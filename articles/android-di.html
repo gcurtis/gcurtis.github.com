@@ -8,7 +8,7 @@
 	<link href="../css/main.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container shadow">
+	<div class="center-container shadow">
 		<h1 style="margin: 0 0 10px 0">Android Dependency Injection</h1>
 		<div class="muted date">February 25, 2013</div>
 		<hr>
@@ -74,23 +74,35 @@
 
 		<p>As mobile devices become more powerful, the apps we create become more complex. It's important to take the time to ensure your Android apps are designed in a modular, testable way. It is generally agreed that a lack of automated testing is no longer acceptable for desktop and web apps, and mobile shouldn't be any exception.</p>
 
-		<hr>
-		<div class="text-center">
-			<small><a href="http://gregcurt.is">gregcurt.is</a></small>
-		</div>
-	</div>
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
+        <hr>
+        <div class="text-center">
+        	<small><a href="http://gregcurt.is">gregcurt.is</a></small>
+        </div>
+    </div>
+    <div id="disqus_thread" class="comment-container shadow"></div>
 	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-38805617-1']);
-		_gaq.push(['_trackPageview']);
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'gregcurtis'; // required: replace example with your forum shortname
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        	var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        	dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-38805617-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+    	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
 </body>
 </html>
