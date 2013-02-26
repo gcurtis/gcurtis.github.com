@@ -35,7 +35,7 @@ body {
 }
 
 .center-container {
-	margin:0.5in auto 0px auto;
+	margin:0px auto 0px auto;
 	width:8.5in;
 	padding: 0.5in 1in 0.5in 1in;
 	min-height:500px;
