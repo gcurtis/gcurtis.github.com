@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>gregcurt.is - Mobile SSO</title>
+	<title>gregcurt.is - Why Mobile SSO is Lacking</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,700' rel='stylesheet' type='text/css'>
 	<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -9,65 +9,79 @@
 </head>
 <body>
 	<div class="center-container shadow">
-		<h1 style="margin: 0 0 10px 0">Mobile SSO</h1>
-		<div class="muted date">March 1, 2013</div>
+		<h1 class="title">Why Mobile SSO is Lacking</h1>
+		<div class="muted date">March 4, 2013</div>
 		<hr>
 
-        <p>Single sign-on (SSO) is a popular feature that was initially designed in the early 2000s for enterprises. The key benefit to SSO is that users only have to remember one set of credentials. The users like this because they don't have to memorize multiple passwords, and enterprises like this because it lowers the costs associated with managing user accounts.</p>
+        <p>Single sign-on (SSO) is a popular feature that was initially designed in the early 2000s for enterprises. The key benefit to SSO is that users only have to remember one set of credentials. Users like this because they don't have to memorize multiple passwords, and enterprises like this because it lowers the costs associated with managing user accounts.</p>
+
+        <h2>Enterprise SSO</h2>
 
         <p>While the concept of SSO is great, its implementation tends to be a problem. The prevailing standard for SSO in the enterprise world is SAML, or Security Assertion Markup Language. The standard itself is quite complex, but the core idea is rather straightforward. In SAML, you have 3 major components:</p>
 
         <ol>
-            <li>User - a user is simply the person trying to login to a service.</li>
-            <li>Service provider - the application or website the user is trying to log into. A common example would be Gmail or Google Apps.</li>
-            <li>Identity provider (IdP) - a company whose job it is to actually authenticate the user.</li>
+            <li><strong>User</strong> - the person trying to login to a service.</li>
+            <li><strong>Service provider</strong> - the application or website the user is trying to log into. A common example would be Box or Google Apps.</li>
+            <li><strong>Identity provider (IdP)</strong> - a company whose job it is to actually authenticate the user. Some examples would be <a href="http://okta.com">Okta</a> or <a href="https://www.pingidentity.com/products/pingfederate/">PingFederate</a>.</li>
         </ol>
 
-        <!-- SAML explanation diagram -->
+        <p class="image-para">
+            <img src="../img/saml-diagram.svg" alt="SSO flow diagram">
+        </p>
 
-        <p>Notice that the entire SAML flow is based on redirects. This is because it was designed for the web. Gmail just redirects the user's browser to the IdP, which in turn redirects back to Gmail after authentication.</p>
+        <p>Notice that the entire SAML flow is based on redirects. This is because it was designed for the web. Box redirects the user's browser to the IdP, which in turn redirects back to Box after authentication.</p>
 
-        <p>A popular solution to SSO in consumer apps is OAuth. To be clear, OAuth is not intended to be an <em>authentication</em> protocol, it is an <em>authorization</em> protocol. The reason why it's used for SSO is because most of the time, authorization requires authentication. For example, if my app wants <em>authorization</em> to access a user's Google account, Google is first going to have to <em>authenticate</em> that user.</p>
+        <h2>Consumer SSO</h2>
 
-        <!-- OAuth explanation diagram -->
+        <p>A popular solution to SSO in consumer apps is OAuth. If you ever see a button that says "Login with Facebook" or "Login with LinkedIn," that's OAuth. To be clear, OAuth is not intended to be an <em>authentication</em> protocol, it is an <em>authorization</em> protocol. The reason why it's used for SSO is because most of the time, authorization requires authentication. For example, if my app wants <em>authorization</em> to access a user's Google account, Google is first going to have to <em>authenticate</em> that user.</p>
 
-        Once again, notice that the flow relies on redirects. This is what causes problems in mobile apps. Existing SSO solutions all require a web browser in some form, and native mobile apps don't run in a browser.
+        <p class="image-para">
+            <img src="../img/oauth-diagram.svg" alt="OAuth flow diagram">
+        </p>
+
+        <p>After Box has permission to access the user's Google account, it can use their Google information to identify them. For example, Box can make a Google API request <code>GetEmail(authToken)</code>. Since <code>authToken</code> is associated with the user's login credentials, <code>GetEmail</code> will return a unique email address guaranteed to identify, and therefore authenticate the user.</p>
+
+        <p>Once again, notice that the flow relies on redirects. This is what causes problems in mobile apps. Existing SSO solutions all require a web browser in some form, and native mobile apps don't run in a browser.</p>
 
         <h2>Using a Web View</h2>
 
         <p>Using a web view is the most common solution to SSO on mobile. Native apps will embed a web view that renders the SSO login pages and handles all the redirects. After authentication is complete, the app will look for an auth token embedded in the web view's URL. This token is then used to access the user's data.</p>
 
-        <!-- Web view explanation diagram -->
+        <p class="image-para">
+            <img src="../img/web-view-diagram.svg" alt="Web view flow diagram">
+        </p>
 
-        <p>This solution is decent because the login process still happens within the native app, making for a better user experience. The bad part is that web views aren't browsers. They cannot handle authentication challenges, certificates, special URLS (we once saw an IdP try to load about:blank), and other edge cases. In order to support the huge number of identity providers, app developers are inevitably forced to create hacky workarounds.</p>
+        <p>This solution is decent because the login process still happens within the native app, making for a better user experience. The bad part is that <strong>web views aren't browsers</strong>. They cannot handle authentication challenges, certificates, special URLS (we once saw an IdP try to load <code>about:blank</code>), and other edge cases. In order to support the huge number of identity providers, app developers are inevitably forced to create hacky workarounds.</p>
 
         <p>Furthermore, web views do not use the browser's cookie storage. This means that sessions aren't remembered and the user is forced to enter their password over and over.</p>
 
         <h2>Using the Web Browser</h2>
 
-        <p>The second most common solution is to just open the user's web browser. The browser will walk the user through the login process and afterwards, the calling app will retrieve the auth token.</p>
-
-        <!-- Web browser explanation diagram -->
+        <p>The second most common solution is to just open the device's web browser. The browser will walk the user through the login process and afterwards, the calling app will retrieve the auth token.</p>
 
         <p>This solves the problem of web view edge cases and cookies, but it has some glaring problems of its own. First, the user experience is jarring. The user is thrown over to their web browser to login and then thrown back to the original app. Even worse, if the login process fails, the user will be left sitting in their web browser and have to manually reopen the app they were trying to use.</p>
 
-        <p>Even more problematic, is that using a browser isn't an option on iOS. Apple's approval process will deny any application that redirects to Safari for login. Apple has their reasons for this, whether or not they are valid is a whole other discussion.</p>
+        <p>Even more problematic, using a browser isn't always an option on iOS. Apple's approval process will <a href="http://www.techdirt.com/articles/20120501/17545618733/apple-rejecting-apps-that-use-dropbox-because-gasp-users-might-sign-up-dropbox-accounts.shtml">deny some applications that redirect to Safari</a> for login. Apple has their reasons for this; whether or not they are valid is a whole other discussion.</p>
 
         <h2>Native SSO</h2>
 
         <p>This leaves us with native SSO. This is by far the best option since it can provide an excellent user experience, and it can always fall back to using web views if the user doesn't have the native SSO app installed.</p>
 
-        <!-- Native SSO explanation diagram -->
+        <p class="image-para">
+            <img src="../img/native-diagram.svg" alt="Native flow diagram">
+        </p>
 
         <p>The downside, is that there aren't many enterprise identity providers with native apps. Consumer apps have been much more progressive with this. The Facebook SDK provides native SSO and Android has Google SSO built-in. The only way to get native SSO support is to hope your identity provider decides to build it.</p>
 
-        <h2>The Ideal Solution</h2>
+        <h2>Using an SSO Interface</h2>
 
         <p>While native SSO is great, it can still be improved upon by putting an interface on top of the various providers. As it exists today, native SSO requires apps to know about different IdPs and how to interact with them. By placing a common interface on top, we can abstract away this problem.</p>
 
-        <!-- Diagram for native SSO with abstractions -->
+        <p class="image-para">
+            <img src="../img/sso-interface-diagram.svg" alt="Native flow diagram">
+        </p>
 
-        <p>Android has somewhat of a solution to this with their <a href="http://developer.android.com/reference/android/accounts/AccountManager.html">AccountManager</a>. Ideally though, the various IdPs would agree upon a standard they could all follow. This would be a win for everyone. Users would have a consistent login experience, developers could reliably implement SSO in their apps, and SSO usage would increase.</p>
+        <p>Android has somewhat of a solution to this with their <a href="http://developer.android.com/reference/android/accounts/AccountManager.html">AccountManager</a>. Ideally though, the various IdPs would agree upon a standard they could all follow. This would be a win for everyone. Users would have a consistent login experience, developers could reliably implement SSO in their apps, and SSO usage would increase. Either way, it's clear that the SSO experience on mobile must be improved if mobile apps are to match the usability of the web.</p>
         <hr>
         <div class="text-center">
         	<small><a href="http://gregcurt.is">gregcurt.is</a></small>

@@ -26,6 +26,15 @@ body {
 	font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace !important;
 }
 
+.image-para {
+	margin: 25px;
+	text-align:center;
+}
+
+.title {
+	margin: 0 0 10px 0;
+}
+
 .comment-container {
 	background-color: white;
 	padding: 0.5in 1in 0.5in 1in;
