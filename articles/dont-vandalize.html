@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gregcurt.is - Don't Vandalize Your Code</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,700' rel='stylesheet' type='text/css'>
+	<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="../css/main.css" rel="stylesheet">
+</head>
+<body>
+	<div class="center-container shadow">
+		<h1 class="title">Don't Vandalize Your Code</h1>
+		<div class="muted date">May 5, 2014</div>
+		<hr>
+
+		<p>Recently, I've been thinking a lot about the <a href="https://en.wikipedia.org/wiki/Broken_windows_theory">broken windows theory</a> and how it applies to software development. This theory has already been <a href="http://pragprog.com/the-pragmatic-programmer/extracts/software-entropy">brought up</a> a <a href="http://blog.codinghorror.com/the-broken-window-theory/">number of times</a> in the context of software, and <a href="https://en.wikipedia.org/wiki/Broken_windows_theory#Criticism_of_the_theory">the theory itself is quite controversial</a>, but it does pose some interesting ideas. I won't go over the details of the theory since it's been brought up so many times before, but the takeaway is that small acts of vandalism (such as broken windows) create a negative feedback loop which results in the escalation toward worse crimes.</p>
+
+		<p style="text-align: center;">
+			<img src="../img/vandalism.jpg" alt="Humorous vandalism on the wall of a bar in San Francisco, reading &quot;VANDALISM'S BAD&quot;.">
+		</p>
+
+		<p>Say that a shady person comes across a car with a broken window. Since it already looks vandalized, this person decides to smash the rest of the windows. Then a second person decides to slash the tires, because clearly no one cares about the car - all of its windows are broken! A third person then comes along and takes the stereo because the tires are slashed and all the windows are busted out. The car is probably abandoned anyway! This keeps escalating until the car is completely wrecked. All of this because the car gave the initial <em>appearance</em> that no one cared about it. For all we know, it could've been a perfectly functioning car that just started out with a broken window.</p>
+
+		<h2>Quality for the Sake of Quality</h2>
+
+		<p>As engineers, why should we bother with things such as style guides, descriptive commit messages, or carefully written documentation? After all, these practices have no impact on architecture or design. Chances are, your code isn't going to become easier to maintain because you consistently use spaces instead of tabs, or because you write grammatically correct sentences in your documentation. There are extreme exceptions to this, but for most code it's true.</p>
+
+		<p>Every engineer will tell you these are good things to have, but few will actually make them a priority. They're usually seen as niceties, only to be addressed when all other more important issues have been resolved - and from a purely engineering standpoint, it's completely correct. Properly capitalizing the sentences in your documentation won't solve any engineering problems. The documentation is still there, it still gets the message across, so why bother fixing it? Making the effort seems like quality for the sake of quality.</p>
+
+		<p>The problem with the purely engineering standpoint is that it overlooks a crucial characteristic of human behavior. These things matter for the same reason that a single broken window matters. Consider the following two code examples:</p>
+
+		<h3>Example 1</h3>
+		<script src="https://gist.github.com/gcurtis/e2ad292cca97f6f85fc5.js"></script>
+
+		<h3>Example 2</h3>
+		<script src="https://gist.github.com/gcurtis/9f57a0e84c25b778df12.js"></script>
+
+		<p>I realize these are small, simple examples, but bear with me while I explain. Ignoring the actual content of the code, which of these examples gives you a better impression? The first example has various styling inconsistencies, spelling mistakes, and generally gives you the sense that the author didn't care. Even in the one-worded commit message the author couldn't bother to capitalize their own name.</p>
+
+		<p>The second example is the exact opposite. The author shows that they cared about what they were creating. They took the extra few minutes to spell words correctly and style things consistently.</p>
+
+		<h2>How Does This Relate to Broken Windows?</h2>
+
+		<p>You might be thinking, "well those examples weren't that bad. I didn't even really notice a difference." But now I want you to imagine a 25,000 line project full of code similar to the first example - poorly formatted comments, inconsistent indentation, spelling mistakes, etc. Would you feel compelled to care about quality when adding to that codebase? I admit that quality probably wouldn't be the first thing on my mind.</p>
+
+		<p>The code could be 100% bug-free and have the most elegant design in the world, but that's definitely not the first impression other developers will get. In other words, the car might run perfectly fine but no one would be able to tell by the way it looks. They just see a car that looks like crap and has a bunch of broken windows. Why should they care about the maintaining the quality of what appears to be a crappy car? After all, no one else seems to care about it.</p>
+
+		<h2>Quality Promotes Quality</h2>
+
+		<p>This is exactly why the small stuff is important. It's the first impression someone gets when reading your code. Like it or not, people make judgments based on initial impressions and appearances - code is no different. All it takes is for someone to get the <em>impression</em> that your code is of low quality (even if it isn't).</p>
+
+		<blockquote>
+			<p>Could I get away with a hacking in this new feature? Why not, this class already <em>looks</em> like a mess.</p>
+		</blockquote>
+
+		<blockquote>
+			<p>The documentation for this method isn't even legitimate English! I don't have to bother updating it - no one is probably reading that anyway.</p>
+		</blockquote>
+
+		<blockquote>
+			<p>The comments for this method all wrong, and this feature is clearly hacked in. So what if my small change introduces a compiler warning?</p>
+		</blockquote>
+
+		<p>In other words, these seemingly small, unimportant details have the tendency to snowball into larger problems. Of course, no one literally thinks these things. Instead, there's general sense of degradation that allows us to rationalize a disregard for future quality. It happens all the time, not just with coding. Have you ever procrastinated doing the dishes because your kitchen was already a mess? Just throw one more plate onto the pile - you'll handle it later. Eventually you're unable to use your sink, your kitchen smells like a combination of soap and marinara sauce from that pan you left to "soak", guests stop coming over, and you begin to wonder how it ever got that way.</p>
+
+		<p>On the other hand, if your code shows that you care, then the exact opposite will happen. Who wants to be the jerk that introduces the first compiler warning into a warning-free codebase? Who wants to be the first person to pollute a beautifully formatted file with an unindented mess of code? <strong>Quality will end up promoting quality.</strong></p>
+
+		<h2>Do Something About It</h2>
+
+		<p>I'm not advocating spending 8 hours documenting every getter/setter in your code or writing a novel for every commit message. I'm not even advocating for perfectly formatted and documented code 100% of the time. The important thing is to care about and to strive for these things. Take the extra 0.5 seconds to hit the shift key when starting a new sentence. Take an hour to set up an automated tool for formatting your code. Be conscious of making small commits with relevant messages, don't just <code>git commit -am "bug fixes"</code> your 2,000+ line change. Or even worse:</p>
+
+		<p><code>git commit -am "fixed the things where the stuff happens and now my message is way too long and oh my god how does the enter key work"</code></p>
+
+		<p>There is simply no valid argument for spending days implementing a feature, and then failing to press the enter key every 72 characters when writing your commit message. Or not bothering to run something as simple as <code>eslint mycode.js</code> to make sure you haven't introduced any lint warnings. And hell, if your Java compiler is giving you a warning because you're using a deprecated method, take five seconds to type out <code>@SuppressWarnings("deprecation")</code>.</p>
+
+		<p>If there's one thing I'd love for people to take away from this, it would be this: <strong>if you care about what you're creating, then put in the effort to show that you care.</strong> It's as simple as that.</p>
+
+        <hr>
+        <div class="text-center">
+        	<small><a href="http://gregcurt.is">gregcurt.is</a></small>
+        </div>
+    </div>
+    <div id="disqus_thread" class="comment-container shadow"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'gregcurtis'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        	var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        	dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-38805617-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+    	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+</body>
+</html>
