@@ -7,11 +7,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-	background-image: url('../img/background.png')
+	background-image: url('../img/background.png');
+	font-size: 11pt;
 }
 
 .gist-data {
-	background-color: white !important; 
+	background-color: white !important;
 }
 
 .line-numbers {
@@ -24,6 +25,7 @@ body {
 
 .gist .gist-file .gist-data .line-pre {
 	font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace !important;
+	font-size: 11pt;
 }
 
 .image-para {
