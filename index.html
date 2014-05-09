@@ -4,54 +4,40 @@
 	<title>gregcurt.is</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,700' rel='stylesheet' type='text/css'>
-	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="css/main.css" rel="stylesheet">
 </head>
 <body>
-	<div class="center-container shadow">
-		<div class="row">
-			<div class="span12">
-				<div class="media drop-shadow">
-					<img src="img/profile.jpeg" alt="" class="img-polaroid pull-left media-object profile">
-					<div class="media-body">
-						<div class="media-heading" style="font-size:18pt;">Greg Curtis</div>
-						<div class="media">
-							<p>Greg is a software developer living in the San Francisco bay area. He currently works at <a href="https://box.com">Box</a> as a Code Reliability Engineer. Interested especially in mobile software design and best practices, he works to improve the quality of apps on Android, iOS, and Windows 8.</p>
-							<iframe class="pull-left" src="http://ghbtns.com/github-btn.html?user=gcurtis&type=follow" allowtransparency="true" frameborder="0" scrolling="0" width="114" height="20" style="margin-bottom:-5px"></iframe>
-							<span class="pull-left" style="width:101px; height:20px;">
-								<a href="https://twitter.com/gurtis" class="twitter-follow-button" data-show-count="false">Follow @gurtis</a>
-								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-							</span>
-							<a class="pull-left" href="http://www.linkedin.com/in/gregrcurtis">
-								<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.png" width="80" height="15" border="0" alt="View Greg Curtis's profile on LinkedIn">
-							</a>
-						</div>
+	<div class="container">
+		<div class="profile">
+			<img src="img/profile.jpeg" alt="" class="picture">
+			<div class="description">
+					<div class="name">Greg Curtis</div>
+					<div class="blurb">Greg is a software developer living in the San Francisco bay area. He currently works at <a href="https://box.com">Box</a> as a Code Reliability Engineer. Interested especially in mobile software design and best practices, he works to improve the quality of apps on Android, iOS, and Windows 8.</div>
+					<div class="links">
+						<iframe src="http://ghbtns.com/github-btn.html?user=gcurtis&type=follow" allowtransparency="true" frameborder="0" scrolling="0" width="114" height="20"></iframe>
+						<a href="https://twitter.com/gurtis" class="twitter-follow-button" data-show-count="false">Follow @gurtis</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+						<a href="http://www.linkedin.com/in/gregrcurtis">
+          					<img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_profile_bluetxt_80x15.png" width="80" height="15" border="0" alt="View Greg Curtis's profile on LinkedIn">
+    					</a>
 					</div>
-					<hr>
-				</div>
-				<div class="row">
-					<div class="span12">
-						<dl>
-							<dt><a href="articles/dont-vandalize.html" class="article">Don't Vandalize Your Code</a></dt>
-							<dd>
-								Recently, I've been thinking a lot about the broken windows theory and how it applies to software development. This theory has already been brought up a number of times in the context of software, and the theory itself is quite controversial...
-							</dd>
-							<dt><a href="articles/mobile-sso.html" class="article">Why Mobile SSO is Lacking</a></dt>
-							<dd>
-								Single sign-on (SSO) is a popular feature that was initially designed in the early 2000s for enterprises. The key benefit to SSO is that users only have to remember one set of credentials. Users like this because...
-							</dd>
-							<dt><a href="articles/android-di.html" class="article">Improve the Testability of Your Android App</a></dt>
-							<dd>
-								The most effective way to improve the testability of your Android app is through a technique such as dependency injection. Dependency injection on Android is a notoriously difficult problem to tackle. The problem...
-							</dd>
-						</dl>
-					</div>
-				</div>
 			</div>
 		</div>
+		<dl>
+			<dt><a href="articles/dont-vandalize.html" class="article">Don't Vandalize Your Code</a></dt>
+			<dd>
+				Recently, I've been thinking a lot about the broken windows theory and how it applies to software development. This theory has already been brought up a number of times in the context of software, and the theory itself is quite controversial...
+			</dd>
+			<dt><a href="articles/mobile-sso.html" class="article">Why Mobile SSO is Lacking</a></dt>
+			<dd>
+				Single sign-on (SSO) is a popular feature that was initially designed in the early 2000s for enterprises. The key benefit to SSO is that users only have to remember one set of credentials. Users like this because...
+			</dd>
+			<dt><a href="articles/android-di.html" class="article">Improve the Testability of Your Android App</a></dt>
+			<dd>
+				The most effective way to improve the testability of your Android app is through a technique such as dependency injection. Dependency injection on Android is a notoriously difficult problem to tackle. The problem...
+			</dd>
+		</dl>
 	</div>
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-38805617-1']);

@@ -1,73 +1,240 @@
-dt {
-	margin-top: 10px;
+body {
+	background-color: #333;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+	font-size: 1em;
+	margin: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 300;
 }
 
-body {
-	background-color: #333;
-	font-size: 11pt;
+a {
+	color: #8ac007;
+	text-decoration: none;
 }
 
-.gist-data {
-	background-color: white !important;
+a:hover {
+	color: #557604;
 }
 
-.line-numbers {
-	background-color: #f9f9f9 !important;
+blockquote {
+	border-left: 5px solid #eee;
+	margin: 0 0 1em 1em;
+	padding: 0 0 0 1em;
 }
 
-.gist-meta {
-	background-color: #f9f9f9 !important;
+blockquote p {
+	margin: 0;
 }
 
-.gist .gist-file .gist-data .line-pre {
-	font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace !important;
-	font-size: 11pt;
+blockquote small {
+	color: #999;
 }
 
-.image-para {
-	margin: 25px;
-	text-align:center;
+cite {
+	font-style: normal;
 }
 
-.title {
-	margin: 0 0 10px 0;
+cite::before {
+	content: "\2014";
+}
+
+dt {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+article, .container {
+	background: white;
+	box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.3);
+	font-weight: 300;
+	margin: 0 auto 2em auto;
+	min-height: 30em;
+	padding: 3em 6em 3em 6em;
+	width: 45em;
+}
+
+article img {
+	display: block;
+	margin: 2em auto 2em auto;
+}
+
+article header {
+	border-bottom: 1px solid #eeeeee;
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+}
+
+article footer {
+	border-top: 1px solid #eeeeee;
+	margin-top: 1em;
+	padding-top: 1em;
+	text-align: center;
+}
+
+article header h1 {
+	font-size: 2em;
+	margin: 0 0 .1em 0;
+	text-rendering: optimizelegibility;
+}
+
+article header time {
+	color: #999999;
+	font-size: 14pt;
+	font-weight: 100;
+	margin-top: 0;
+}
+
+code {
+	background-color: #f5f5f5;
+	color: #d14;
+	font-family: Menlo, Consolas, monospace;
+	font-size: .8em;
+	padding: .2em;
+}
+
+pre {
+	background-color: #f5f5f5;
+	padding: 1em;
+	page-break-inside: avoid;
+	overflow: scroll;
+}
+
+pre code {
+	background-color: inherit;
+	color: inherit;
+	padding: 0;
 }
 
 .comment-container {
 	background-color: white;
-	padding: 0.5in 1in 0.5in 1in;
-	width: 8.5in;
-	font-weight:300;
-	margin:0.5in auto 0.5in auto;
-}
-
-.center-container {
-	margin:0px auto 0px auto;
-	width:8.5in;
-	padding: 0.5in 1in 0.5in 1in;
-	min-height:500px;
-	font-weight:300;
-	background:white;
-}
-
-.shadow {
 	box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.3);
+	font-weight: 300;
+	margin: 0 auto 2em auto;
+	padding: 3em 6em 3em 6em;
+	width: 45em;
+}
+
+.comment-container:empty {
+	display: none;
 }
 
 .profile {
-	height: 85px;
-	width: 85px;
+	border-bottom: 1px solid #eeeeee;
+	margin-bottom: 1em;
+	padding-bottom: 1em;
 }
 
-.article {
-	font-size:14pt;
+.profile .picture {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: 0 .05em .25em rgba(0, 0, 0, 0.1);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	height: 7.5em;
+	margin-right: .5em;
+	padding: .25em;
+	vertical-align: top;
+	width: 7.5em;
 }
 
-.date {
-	font-size: 14pt;
-	font-weight: 100;
+.profile .description {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	width: 36.5em;
+}
+
+.profile .name {
+	font-size: 1.5em;
+	height: 1.5em;
+}
+
+.profile .blurb {
+	height: 5.5em;
+}
+
+.profile .links > a, iframe {
+	display: inline-block;
+	margin-top: 1em;
+	vertical-align: middle;
+}
+
+@media all and (max-width: 59em) {
+	body {
+		background-color: #fff;
+	}
+	article, .container {
+		box-shadow: none;
+		margin: 0;
+		width: auto;
+	}
+	.comment-container {
+		background-color: #fff;
+		box-shadow: none;
+		margin: 0;
+		padding: 0 6em 0 6em;
+		width: auto;
+	}
+	.profile .picture {
+		display: block;
+		float: left;
+	}
+	.profile .description {
+		display: block;
+		width: auto;
+	}
+	.profile .blurb {
+		display: block;
+		height: auto;
+		min-height: 5.5em;
+	}
+	.profile .name {
+		height: auto;
+	}
+	.profile .links {
+		display: block;
+	}
+}
+
+@media print {
+	body {
+		background-color: #fff;
+	}
+	article, .container {
+		box-shadow: none;
+		margin: 0;
+		padding: 0;
+		width: auto;
+	}
+	.comment-container {
+		background-color: #fff;
+		box-shadow: none;
+		margin: 0;
+		padding: 0;
+		width: auto;
+	}
+	.profile .picture {
+		display: block;
+		float: left;
+	}
+	.profile .description {
+		display: block;
+		width: auto;
+	}
+	.profile .blurb {
+		display: block;
+		height: auto;
+		min-height: 5.5em;
+	}
+	.profile .name {
+		height: auto;
+	}
+	.profile .links {
+		display: block;
+	}
 }

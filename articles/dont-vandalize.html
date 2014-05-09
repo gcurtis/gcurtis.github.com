@@ -4,20 +4,19 @@
 	<title>gregcurt.is - Don't Vandalize Your Code</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,700' rel='stylesheet' type='text/css'>
-	<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="../css/main.css" rel="stylesheet">
+	<link href="../css/syntax.css" rel="stylesheet">
 </head>
 <body>
-	<div class="center-container shadow">
-		<h1 class="title">Don't Vandalize Your Code</h1>
-		<div class="muted date">May 5, 2014</div>
-		<hr>
+	<article>
+		<header>
+			<h1>Don't Vandalize Your Code</h1>
+			<time pubdate="pubdate" datetime="2014-5-5">May 5, 2014</div>
+		</header>
 
 		<p>Recently, I've been thinking a lot about the <a href="https://en.wikipedia.org/wiki/Broken_windows_theory">broken windows theory</a> and how it applies to software development. This theory has already been <a href="http://pragprog.com/the-pragmatic-programmer/extracts/software-entropy">brought up</a> a <a href="http://blog.codinghorror.com/the-broken-window-theory/">number of times</a> in the context of software, and <a href="https://en.wikipedia.org/wiki/Broken_windows_theory#Criticism_of_the_theory">the theory itself is quite controversial</a>, but it does pose some interesting ideas. I won't go over the details of the theory since it's been brought up so many times before, but the takeaway is that small acts of vandalism (such as broken windows) create a negative feedback loop which results in the escalation toward worse crimes.</p>
 
-		<p style="text-align: center;">
-			<img src="../img/vandalism.jpg" alt="Humorous vandalism on the wall of a bar in San Francisco, reading &quot;VANDALISM'S BAD&quot;.">
-		</p>
+		<img src="../img/vandalism.jpg" alt="Humorous vandalism on the wall of a bar in San Francisco, reading &quot;VANDALISM'S BAD&quot;.">
 
 		<p>Say that a shady person comes across a car with a broken window. Since it already looks vandalized, this person decides to smash the rest of the windows. Then a second person decides to slash the tires, because clearly no one cares about the car - all of its windows are broken! A third person then comes along and takes the stereo because the tires are slashed and all the windows are busted out. The car is probably abandoned anyway! This keeps escalating until the car is completely wrecked. All of this because the car gave the initial <em>appearance</em> that no one cared about it. For all we know, it could've been a perfectly functioning car that just started out with a broken window.</p>
 
@@ -30,10 +29,70 @@
 		<p>The problem with the purely engineering standpoint is that it overlooks a crucial characteristic of human behavior. These things matter for the same reason that a single broken window matters. Consider the following two code examples:</p>
 
 		<h3>Example 1</h3>
-		<script src="https://gist.github.com/gcurtis/e2ad292cca97f6f85fc5.js"></script>
+
+		<pre>commit 84a32fae9386c58ba697456136f9a70aeb559019
+Author: greg curtis <greg.r.curtis@gmail.com>
+Date:   Thu Apr 17 17:59:48 2014 -0700
+
+   fizzbuzz</pre>
+
+   		<pre><code><span class="hljs-comment">// prints a list of the first 100 fizzbuzz numbers</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fizzBuzz</span><span class="hljs-params">()</span> {</span>
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i=<span class="hljs-number">1</span>; i&lt;=<span class="hljs-number">100</span>; i++) {
+        <span class="hljs-keyword">var</span> string = <span class="hljs-string">''</span>;
+
+
+        <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>) {
+          string += <span class="hljs-string">'Fizz'</span>;
+        }
+        <span class="hljs-keyword">if</span> (i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
+          string += <span class="hljs-string">"Buzz"</span>;
+        }
+        <span class="hljs-comment">// if string is empty then i is not divsible by 3 or 5, so print the number instead</span>
+        <span class="hljs-keyword">if</span> (string==<span class="hljs-string">''</span>)
+        {
+            string+=i;
+        }
+
+    console.log(string);
+    }
+}
+</code></pre>
 
 		<h3>Example 2</h3>
-		<script src="https://gist.github.com/gcurtis/9f57a0e84c25b778df12.js"></script>
+
+		<pre>commit 84a32fae9386c58ba697456136f9a70aeb559019
+Author: Greg Curtis <greg.r.curtis@gmail.com>
+Date:   Thu Apr 17 17:59:48 2014 -0700
+
+   Add fizzBuzz function</pre>
+
+		<pre><code><span class="hljs-comment">/**
+ * Prints a list of the first 100 Fizz Buzz numbers.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fizzBuzz</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i++) {
+        <span class="hljs-keyword">var</span> string = <span class="hljs-string">''</span>;
+
+        <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>) {
+            string += <span class="hljs-string">'Fizz'</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
+            string += <span class="hljs-string">'Buzz'</span>;
+        }
+
+        <span class="hljs-comment">// If "string" is empty, then i is not divisible by 3 or 5, so print</span>
+        <span class="hljs-comment">// the number instead.</span>
+        <span class="hljs-keyword">if</span> (string == <span class="hljs-string">''</span>) {
+            string += i;
+        }
+
+        console.log(string);
+    }
+}
+</code></pre>
 
 		<p>I realize these are small, simple examples, but bear with me while I explain. Ignoring the actual content of the code, which of these examples gives you a better impression? The first example has various styling inconsistencies, spelling mistakes, and generally gives you the sense that the author didn't care. Even in the one-worded commit message the author couldn't bother to capitalize their own name.</p>
 
@@ -69,17 +128,16 @@
 
 		<p>I'm not advocating spending 8 hours documenting every getter/setter in your code or writing a novel for every commit message. I'm not even advocating for perfectly formatted and documented code 100% of the time. The important thing is to care about and to strive for these goals. Take the extra 0.5 seconds to hit the shift key when starting a new sentence. Take an hour to set up an automated tool for formatting your code. Be conscious of making small commits with relevant messages, don't just <code>git commit -am "bug fixes"</code> your 2,000+ line change. Or even worse:</p>
 
-		<p><code>git commit -am "fixed the things where the stuff happens and now my message is way too long and oh my god how does the enter key work"</code></p>
+		<pre><code>git commit -am "fixed the things where the stuff happens and now my message is way too long and oh my god how does the enter key work"</code></pre>
 
 		<p>There is simply no valid argument for spending days implementing a feature, and then failing to press the enter key every 72 characters when writing your commit message. Or not bothering to run something as simple as <code>eslint mycode.js</code> to make sure you haven't introduced any lint warnings. And hell, if your Java compiler is giving you a warning because you're using a deprecated method, take five seconds to type out <code>@SuppressWarnings("deprecation")</code>.</p>
 
 		<p>If there's one thing I'd love for people to take away from this, it would be this: <strong>if you care about what you're creating, then put in the effort to show that you care.</strong> It's as simple as that.</p>
 
-        <hr>
-        <div class="text-center">
+        <footer>
         	<small><a href="http://gregcurt.is">gregcurt.is</a></small>
-        </div>
-    </div>
+        </footer>
+    </article>
     <div id="disqus_thread" class="comment-container shadow"></div>
 	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -92,8 +150,6 @@
         	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-38805617-1']);

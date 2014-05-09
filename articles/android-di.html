@@ -4,46 +4,125 @@
 	<title>gregcurt.is - Improve the Testability of Your Android App</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,700' rel='stylesheet' type='text/css'>
-	<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="../css/main.css" rel="stylesheet">
+	<link href="../css/syntax.css" rel="stylesheet">
 </head>
 <body>
-	<div class="center-container shadow">
-		<h1 class="title">Improve the Testability of Your Android App</h1>
-		<div class="muted date">February 25, 2013</div>
-		<hr>
+	<article>
+		<header>
+			<h1>Improve the Testability of Your Android App</h1>
+			<time pubdate="pubdate" datetime="2013-2-25">February 25, 2013</time>
+		</header>
+
 		<p>The most effective way to improve the testability of your Android app is through a technique such as dependency injection. Dependency injection on Android is a notoriously difficult problem to tackle. The problem stems from the fact that Android manages the creation and destruction of all activity instances, thereby making it difficult for us to provide dependencies. The diagram below, taken from the Android developer docs, illustrates the activity lifecycle:</p>
-		<p style="text-align: center;">
-			<img src="http://developer.android.com/images/training/basics/basic-lifecycle.png" alt="Android activity lifecycle">
-		</p>
+
+		<img src="http://developer.android.com/images/training/basics/basic-lifecycle.png" alt="Android activity lifecycle">
+
 		<p>So why is this an issue? When building testable apps, we want to be able to inject dependencies into our activities. This allows us to swap out our "real" objects with testable mocks. However, we can't do this since we don't have control over the creation of our activities. Unfortunately, this tends to promote a design involving heavy use of static singletons. Let's take a look at an example of a typical Android activity class.</p>
 
-		<p class="well"><span class="label label-info">Note</span> I'm not going to go into detail over what <a href="http://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a> and <a href="http://en.wikipedia.org/wiki/Inversion_of_control">inversion of control</a> (IoC) is. It has become a fairly common design pattern in the past few years, and there are plenty of other resources that can explain it far better than I can.</p>
-		
+		<p><strong>Note:</strong> I'm not going to go into detail over what <a href="http://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a> and <a href="http://en.wikipedia.org/wiki/Inversion_of_control">inversion of control</a> (IoC) is. It has become a fairly common design pattern in the past few years, and there are plenty of other resources that can explain it far better than I can.</p>
+
 		<h2>Basic Activity Example</h2>
-		<script src="https://gist.github.com/gcurtis/77cc8009009667b0ac7a.js"></script>
-		
+
+		<pre><code><span class="hljs-javadoc">/**
+ * A simple activity that makes a web service call when a button is clicked.
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Activity</span> {</span>
+	<span class="hljs-keyword">private</span> WebServiceClient client;
+
+	<span class="hljs-annotation">@Override</span>
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span>(<span class="hljs-keyword">final</span> Bundle savedInstanceState) {
+		client = WebServiceClient.getInstance();
+
+		Button btn = (Button) findViewById(R.id.btn);
+		btn.setOnClickListener(<span class="hljs-keyword">new</span> OnClickListener() {
+
+			<span class="hljs-annotation">@Override</span>
+			<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span>(<span class="hljs-keyword">final</span> View v) {
+				client.doSomething();
+			}
+		});
+	}
+}
+</code></pre>
+
 		<p>This makes sense at a first glance, but now say we want to test our activity. How do we do this without making real web service calls? We can create an integration test that makes calls to our server, but those are slow, less reliable, and require a separate testing environment.</p>
+
 		<p>Also notice that there is no straightforward way of providing objects to the <code>onCreate()</code> method. We cannot add any additional parameters because it is an overridden method defined by the base <code>Activity</code> class. We also cannot create a constructor because the Android OS only knows how to call the default empty constructor. So how do we fix this?</p>
-		
+
 		<h2>Using The Service Locator Pattern</h2>
 
 		<p>The first option is to use the service locator pattern. If you aren't familiar with this pattern, it's basically a way for our activity to grab the services (or dependencies) it needs.</p>
 
 		<blockquote>
 			<p>The basic idea behind a service locator is to have an object that knows how to get hold of all of the services that an application might need.</p>
-			<small><cite><a href="http://martinfowler.com/articles/injection.html">Inversion of Control Containers and the Dependency Injection pattern</a></cite> by Martin Fowler</small>
+			<small><cite><a href="http://martinfowler.com/articles/injection.html">Inversion of Control Containers and the Dependency Injection Pattern</a></cite> by Martin Fowler</small>
 		</blockquote>
 
 		<p>The following is an example of how this might work in the context of an Android app.</p>
 
 		<h3>Android Service Locator</h3>
-		<script src="https://gist.github.com/gcurtis/0eb21929f882ad36091b.js"></script>
+
+		<pre><code><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Activity</span> {</span>
+	<span class="hljs-keyword">private</span> WebServiceClient client;
+
+	<span class="hljs-annotation">@Override</span>
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span>(<span class="hljs-keyword">final</span> Bundle savedInstanceState) {
+		client = ServiceLocator.getServiceLocator().getWebServiceClient();
+
+		Button btn = (Button) findViewById(R.id.btn);
+		btn.setOnClickListener(<span class="hljs-keyword">new</span> OnClickListener() {
+
+			<span class="hljs-annotation">@Override</span>
+			<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span>(<span class="hljs-keyword">final</span> View v) {
+				client.doSomething();
+			}
+		});
+	}
+}
+</code></pre>
+
+		<pre><code><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServiceLocator</span> {</span>
+	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ServiceLocator instance;
+	<span class="hljs-keyword">private</span> IWebServiceClient webServiceClient;
+
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setServiceLocator</span>(ServiceLocator serviceLocator) {
+		<span class="hljs-keyword">this</span>.instance = serviceLocator;
+	}
+
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ServiceLocator <span class="hljs-title">getServiceLocator</span>() {
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.serviceLocator;
+	}
+
+	<span class="hljs-keyword">public</span> <span class="hljs-title">ServiceLocator</span>(IWebServiceClient webServiceClient) {
+		<span class="hljs-keyword">this</span>.webServiceClient = webServiceClient;
+	}
+
+	<span class="hljs-keyword">public</span> IWebServiceClient <span class="hljs-title">getWebServiceClient</span>() {
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.webServiceClient;
+	}
+}
+</code></pre>
 
 		<p>Now we can provide our <code>ServiceLocator</code> with a mock <code>WebServiceClient</code> when writing tests.</p>
 
 		<h3>Testing With Service Locator</h3>
-		<script src="https://gist.github.com/gcurtis/68b457ed8e74c362fa6d.js"></script>
+
+		<pre><code><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivityTests</span> {</span>
+
+	<span class="hljs-annotation">@Test</span>
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testClickingButtonDoesSomethingWithWebService</span>() {
+		IWebServiceClient mockWebService = createMock(WebServiceClient.class);
+		ws.doSomething();
+		expectLastCall();
+		replay(mockWebService);
+
+		ServiceLocator sl = <span class="hljs-keyword">new</span> ServiceLocator(mockWebService);
+
+		verify(mockWebService);
+	}
+}
+</code></pre>
 
 		<p>Our code is now much better. We can easily test logic that makes web service calls, our dependencies are clearly defined through <code>ServiceLocator</code>, and we've reduced the coupling between classes.</p>
 
@@ -55,7 +134,50 @@
 
 		<h3>Dagger Example</h3>
 
-		<script src="https://gist.github.com/gcurtis/3d90ceed779b09a3f10a.js"></script>
+		<pre><code><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Activity</span> {</span>
+
+	<span class="hljs-annotation">@Inject</span>
+	<span class="hljs-keyword">private</span> IWebServiceClient client;
+
+	<span class="hljs-annotation">@Override</span>
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span>(<span class="hljs-keyword">final</span> Bundle savedInstanceState) {
+		MyApp app = (MyApp) getApplication();
+		app.getObjectGraph().inject(<span class="hljs-keyword">this</span>);
+
+		Button btn = (Button) findViewById(R.id.btn);
+		btn.setOnClickListener(<span class="hljs-keyword">new</span> OnClickListener() {
+
+			<span class="hljs-annotation">@Override</span>
+			<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span>(<span class="hljs-keyword">final</span> View v) {
+				client.doSomething();
+			}
+		});
+	}
+}
+</code></pre>
+
+		<pre><code><span class="hljs-annotation">@Module</span>(entryPoints = MainActivity.class)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DefaultModule</span> {</span>
+	<span class="hljs-annotation">@Provides</span> IWebServiceClient provideWebServiceClient() {
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WebServiceClient();
+	}
+}
+</code></pre>
+
+		<pre><code><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Application</span> {</span>
+	<span class="hljs-keyword">private</span> ObjectGraph objectGraph;
+
+	<span class="hljs-annotation">@Override</span>
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span>() {
+		<span class="hljs-keyword">super</span>.onCreate();
+		<span class="hljs-keyword">this</span>.objectGraph = ObjectGraph.create(<span class="hljs-keyword">new</span> DefaultModule());
+	}
+
+	<span class="hljs-keyword">public</span> ObjectGraph <span class="hljs-title">getObjectGraph</span>() {
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.objectGraph;
+	}
+}
+</code></pre>
 
 		<p>So there we have it. I won't go into the details of how to use Dagger, but if you've used an IoC framework before, the syntax is fairly self-explanatory. Here, we get an instance of Dagger's object graph and use it to inject dependencies into our <code>MainActivity</code> object. Our Dagger <code>ObjectGraph</code> instance is essentially acting as a service locator.</p>
 
@@ -74,12 +196,11 @@
 
 		<p>As mobile devices become more powerful, the apps we create become more complex. It's important to take the time to ensure your Android apps are designed in a modular, testable way. It is generally agreed that a lack of automated testing is no longer acceptable for desktop and web apps, and mobile shouldn't be any exception.</p>
 
-        <hr>
-        <div class="text-center">
-        	<small><a href="http://gregcurt.is">gregcurt.is</a></small>
-        </div>
-    </div>
-    <div id="disqus_thread" class="comment-container shadow"></div>
+		<footer>
+			<small><a href="http://gregcurt.is">gregcurt.is</a></small>
+		</footer>
+    </article>
+    <div id="disqus_thread" class="comment-container"></div>
 	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'gregcurtis'; // required: replace example with your forum shortname
