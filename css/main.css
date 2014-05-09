@@ -98,7 +98,7 @@ code {
 
 pre {
 	background-color: #f5f5f5;
-	overflow: scroll;
+	overflow: auto;
 	padding: 1em;
 	page-break-inside: avoid;
 }
