@@ -1,0 +1,73 @@
+==================================================================
+https://keybase.io/gcurtis
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://gregcurt.is
+  * I am gcurtis (https://keybase.io/gcurtis) on keybase.
+  * I have a public key with fingerprint 6574 6B89 36DF 358B 3F63  9B75 FADD 3C7B 1BDE A7E2
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101128405685a5f06603172a4c3279fe3a8370db0c20f8a24a925f47bed53d546160a",
+            "fingerprint": "65746b8936df358b3f639b75fadd3c7b1bdea7e2",
+            "host": "keybase.io",
+            "key_id": "fadd3c7b1bdea7e2",
+            "kid": "0101128405685a5f06603172a4c3279fe3a8370db0c20f8a24a925f47bed53d546160a",
+            "uid": "f4c4c71b5877063f952416d41ae8b719",
+            "username": "gcurtis"
+        },
+        "service": {
+            "hostname": "gregcurt.is",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1469644988,
+    "expire_in": 157680000,
+    "prev": "0dbbf941498f04e82fcd2da3f1fafd68e0566481cdb0ef26a2ce1743dec752a0",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1
+
+owGtkmtMFFcUx3eXVnEpwpoSLGKTjsXWhsc878wstiJBuxojRsojVljncQcGll2Y
+3QUMLgKJERs1NYQKqChLG6woKQ9D6AaKWApubUUptQoWrQpVgxKhadpa2hlav/Vj
+75ebe+7v/M85/5wPgwN0Bn3p2T/jhl5u7tN//YDXpdfp+koR3iHuRsylSB5cuKBN
+hE6XNU8WETOCYiiG4QyJUoChOEpCAUAJjMY5UiBwmpUgwTEEjYo8KuCoxHA4ybE4
+JZE0D0WKECkSYADlkGhEku3ZUClQZLtLlQUUTQKeYQkgSgTF8IQECJanKYkTRUKg
+eYwXIUdDXE3McTi1DLU5nnPCWNmhxtSHdaG9/+D/577d/9QhBVKgMZ5iaBoFhMRS
+OIkBkcQ4yPA0xmqgEyp2Lh+qdLbgVlyyE/FEI2qwSBag5qs2yHNAgQtMrApFIwWK
+w+UQHDb1I8flKjBrea7dBRpYDHnrvxJWXraLqolqQhFUnLLDjpgxlRRcsqaJkYAF
+JMkyTDQCSwpkBVpljaBowKDq0crAIs0ZkecllsRINpWRUBIyuCSIuMgREiZxkggY
+qHoGSAYTVHOghAMOFyBGk4QIBZrCORTRpiq0OxAzqfbJZauaTjnbzrncCkQ8xgOG
+yBd0eoNu0YsGbb10xiWhz3cOXgl5FlK+0mrNfD2wOUqIWrcmPXD53EzNispdk2eS
+exoSwszhG1rc82VRwxXVR4+snL+1+I2c+WRT4uXcx7/Wuz5OvlhyTHnb3z+9rXPs
+y6WtgR/0r7Jkb0zLcnKJztyIwV/Ot7ozfxof0f+emHTIFjNw99m5wTPGhk8zazY1
+NPmiilpPjcNT0o1LEWJJUrd7RUPF5sWe8NUbE3qqYuzDS8+bfEVjvuWrrgdUcH37
+mpaMPLrChj0cPQ3KX3lvAo5GTvbE7oz/y7ZnutD0Udkyz9b+42vXpV4/O5mFPG3I
+s20vOwq9jyeM7YPtwfmvds2AhBNlnzOXTbMpP0REptsPJle6p0ZA+N4ptyVuvzjT
+1Jt6E/S23VIMvrri2a66/d9+FQS9vfmX4nVh/T9fqI3KDTZb4nxZKZ7xxvjZwarf
+7nzxCXV3POvOZ93H9xgcb+kmv/9mUeh0Y2zbeNVgh6X5yeaaqaBEwXjScoQesxm3
+dgfUGf3DnW8KMf2Hr0W0DJS2+R1z7qCOLQ/WNx57Z3vGQDlIuhd2f6gr03cvsH6v
+yTc18qjQu6uydq23vtB/Y2p4Z+ftyva5kJvnMv4IxYZOJ1X/OPEk431qfUjHd1df
+2iSO5rWM1b7b5j9Qak1L35Znvu3BvLmeyWsxGVvYQ2mv7dvxkMmv1lesKb5w0lSf
+cPWifwe57GDK/bANT/8G
+=QOih
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/gcurtis
+
+==================================================================
