@@ -1,8 +1,6 @@
 body {
-	background-color: #333;
 	font-family: system-ui, "Helvetica Neue", "Segoe UI", sans-serif;
-	font-size: 1em;
-	margin: 0;
+	margin: 2em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -44,16 +42,6 @@ dt {
 	font-size: 1.2em;
 	font-weight: bold;
 	margin-top: 10px;
-}
-
-article, .container {
-	background: white;
-	box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.3);
-	font-weight: 300;
-	margin: 0 auto 2em auto;
-	min-height: 30em;
-	padding: 3em 6em 3em 6em;
-	width: 45em;
 }
 
 article img {
@@ -150,37 +138,6 @@ pre code {
 	display: inline-block;
 	margin-top: 1em;
 	vertical-align: middle;
-}
-
-@media all and (max-width: 59em) {
-	body {
-		background-color: #fff;
-	}
-	article, .container {
-		box-shadow: none;
-		margin: 0;
-		padding: 5% 10%;
-		width: auto;
-	}
-	.profile .picture {
-		display: block;
-		float: left;
-	}
-	.profile .description {
-		display: block;
-		width: auto;
-	}
-	.profile .blurb {
-		display: block;
-		height: auto;
-		min-height: 5.5em;
-	}
-	.profile .name {
-		height: auto;
-	}
-	.profile .links {
-		display: block;
-	}
 }
 
 @media print {
