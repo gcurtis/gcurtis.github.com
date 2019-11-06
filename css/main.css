@@ -109,19 +109,6 @@ pre code {
 	padding: 0;
 }
 
-.comment-container {
-	background-color: white;
-	box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.3);
-	font-weight: 300;
-	margin: 0 auto 2em auto;
-	padding: 3em 6em 3em 6em;
-	width: 45em;
-}
-
-.comment-container:empty {
-	display: none;
-}
-
 .profile {
 	border-bottom: 1px solid #eeeeee;
 	margin-bottom: 1em;
@@ -175,13 +162,6 @@ pre code {
 		padding: 5% 10%;
 		width: auto;
 	}
-	.comment-container {
-		background-color: #fff;
-		box-shadow: none;
-		margin: 0;
-		padding: 0 10%;
-		width: auto;
-	}
 	.profile .picture {
 		display: block;
 		float: left;
@@ -208,13 +188,6 @@ pre code {
 		background-color: #fff;
 	}
 	article, .container {
-		box-shadow: none;
-		margin: 0;
-		padding: 0;
-		width: auto;
-	}
-	.comment-container {
-		background-color: #fff;
 		box-shadow: none;
 		margin: 0;
 		padding: 0;
