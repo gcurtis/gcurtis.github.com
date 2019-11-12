@@ -2,7 +2,7 @@ body {
 	font-family: system-ui, "Helvetica Neue", "Segoe UI", sans-serif;
 	line-height: 1.4em;
 	margin: 2em auto 2em auto;
-	max-width: 35em;
+	max-width: 37em;
 }
 
 h1 {
@@ -119,20 +119,27 @@ pre code {
 }
 
 .links {
+	line-height: 32px;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
 .links li {
-	display: inline;
+	display: inline-block;
+	margin-right: 8px;
 }
 
 .links img {
+	display: inline-block;
 	height: 32px;
-	margin: 8px;
+	margin: 0 8px 0 0;
 	vertical-align: middle;
 	width: 32px;
+}
+
+.align-middle {
+	vertical-align: middle;
 }
 
 @media print {
