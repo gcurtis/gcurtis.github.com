@@ -26,9 +26,9 @@ Software Engineer (Oct 2012 - Oct 2014)
 - Tech lead on the Productivity Engineering team. Advocated for best practices
   and mentored engineers, leading to improved efficiency and collaboration
   throughout the organization.
-- Led the design and implementation of tools to enhance developer workflow,
-  continuous integration, and service monitoring, which cut down on the
-  development life cycle.
+- Led the design and implementation of tools written in Go and Python to enhance
+  developer workflow, continuous integration, and service monitoring, which cut
+  down on the development life cycle.
 - Bootstrapped the use of Ansible, Prometheus, and EC2 to automate large parts
   of the Box web app release process.
 - Led and advocated for the [Box open source program][1]. Coordinated legal,
