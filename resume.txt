@@ -17,6 +17,24 @@ Skills
 Experience
 ----------
 
+### Whole Self
+
+Founder (Sep 2018 - Nov 2019)
+
+- Bootstrapped startup in the health/wellness space consisting of an iOS app
+  that lends affordability and ease of use to small and independent studio
+  owners.
+- Wrote a REST web service in Go to handle the scheduling, payment processing,
+  and reporting for the app.
+
+### Dilectus
+
+Software Engineer (Feb 2018 - Aug 2018)
+
+- Worked with a small team to write a backend service in Go that ingested data
+  from Greenhouse, resumés, and other sources, and then applied machine learning
+  models to prioritize potential candidates for recruiters.
+
 ### Box
 
 Staff Software Engineer (Oct 2016 - Jan 2018)  
@@ -47,7 +65,7 @@ Software Engineer (Dec 2010 - Mar 2012)
 - Led the development on projects for Fujifilm photo kiosks, ITT Inc. shock
   absorber simulators, and other contracts using a Microsoft .NET focused stack.
 - Introduced automated testing, continuous integration, and other best practices
-  to an organization of 6-10 engineers. 
+  to an organization of 6-10 engineers.
 
 Education
 ---------
